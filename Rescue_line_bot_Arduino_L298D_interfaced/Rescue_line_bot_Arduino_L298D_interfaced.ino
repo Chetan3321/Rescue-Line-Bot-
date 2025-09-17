@@ -7,10 +7,11 @@ int enB = 3;
 int in3 = 5;
 int in4 = 4;
 
-const int onblack= 300;  // reading for black line from sensor is less than this
-const int onWhite= 1000; // reading for white line is greater than this
+const int onblack= 1;  // reading for black line from sensor is less than this
+const int onWhite= 0; // reading for white line is greater than this
 
-void setup() {
+void setup() 
+{
   // Set all the motor control pins to outputs
 
   
@@ -24,7 +25,7 @@ void setup() {
   pinMode(in4, OUTPUT);
 
     // pinMode(A0,INPUT);  
-  pinMode(A1,INPUT);  //extreme left sensor
+  pinMode(A0,INPUT);  //extreme left sensor
   pinMode(A2,INPUT);  //left
   pinMode(A3,INPUT);  // middle sensor
   pinMode(A4,INPUT);   // right
@@ -41,11 +42,12 @@ void setup() {
 
 void loop()
 {
- int sensor1=analogRead(A1);//sensor1  Extreme Left
-int sensor2=analogRead(A2);//sensor2 
-int sensor3=analogRead(A3);//sensor3  middle
-int sensor4=analogRead(A4);//sensor4  
-int sensor5=analogRead(A5);//sensor5   Extreme right
+ int sensor1=digitalRead(A0);//sensor1  Extreme Left
+int sensor2=digitalRead(A2);//sensor2 
+int sensor3=digitalRead(A3);//sensor3  middle
+int sensor4=digitalRead(A4);//sensor4  
+int sensor5=digitalRead(A5);//sensor5   Extreme right
+
 Serial.print("extreme Left: ");
 Serial.print(sensor1);
 Serial.print("\t lower left: ");
