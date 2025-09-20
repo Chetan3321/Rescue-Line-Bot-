@@ -42,53 +42,66 @@ void setup()
 
 void loop()
 {
- int sensor1=digitalRead(A0);//sensor1  Extreme Left
-int sensor2=digitalRead(A2);//sensor2 
-int sensor3=digitalRead(A3);//sensor3  middle
-int sensor4=digitalRead(A4);//sensor4  
-int sensor5=digitalRead(A5);//sensor5   Extreme right
+ int extreme_left=digitalRead(A0);//extreme_left  Extreme Left
+int lower_left=digitalRead(A2);//lower_left 
+int middle=digitalRead(A3);//middle  middle
+int lower_right=digitalRead(A4);//lower_right  
+int extreme_right=digitalRead(A5);//extreme_right   Extreme right
 
 Serial.print("extreme Left: ");
-Serial.print(sensor1);
+Serial.print(extreme_left);
 Serial.print("\t lower left: ");
-Serial.print(sensor2);
+Serial.print(lower_left);
 Serial.print("\t middle: ");
-Serial.print(sensor3);
+Serial.print(middle);
 Serial.print("\t lowerRight: ");
-Serial.print(sensor4);
+Serial.print(lower_right);
 Serial.print("\t Extreme Right: ");
-Serial.println(sensor5);
+Serial.println(extreme_right);
 
+analogWrite(enA, 180);
+analogWrite(enB, 180);
 
-if( isOnBlack(sensor1)){
+if( isOnBlack(extreme_left) || isOnBlack(lower_left))
+{
   Left();
-}else{
+  Left();
+  Left();
+}
 
-  if(isOnBlack(sensor3)&&isOnWhite(sensor1)){
+else if( isOnBlack(extreme_right) || isOnBlack(lower_right))
+{
+  Right();
+  Right();
+  Right();
+}
+
+else
+{
+  if(isOnWhite(extreme_left) && isOnWhite(extreme_right) )
+  {
     Forward();
-  }else
-
-  if( isOnWhite(sensor1)&& isOnWhite(sensor3)&& isOnBlack(sensor5)  ){
+  }
+  else if(isOnWhite(lower_left) && isOnBlack(lower_right) && isOnBlack(extreme_right)  )
+    {
     Right();
-  }else
-  
-  if(isOnBlack(sensor2)){
+  }
+  else if(isOnBlack(lower_left) &&  isOnWhite(lower_right) &&  isOnWhite(extreme_right) )
+  {
     Left();
-  }else
-  if(isOnBlack(sensor4)){
-    Right();
-  }else
-  if( isOnWhite(sensor1) && isOnWhite(sensor2) && isOnWhite(sensor3) && isOnWhite(sensor4) && isOnWhite(sensor5) ){
+  }
+  else if( isOnWhite(extreme_left) && isOnWhite(lower_left) && isOnWhite(middle) && isOnWhite(lower_right) && isOnWhite(extreme_right) ){
     Left();   // replace with left if gap is present
     Left();   // replace with left if gap is present
     Left();   // replace with left if gap is present
     Left();   // replace with left if gap is present
   }
+  else if( isOnBlack(extreme_left) && isOnBlack(lower_left) && isOnBlack(middle) && isOnBlack(lower_right) && isOnBlack(extreme_right) ){
+    Stop();
+  }
 
 
 }
-  
-  
   
 
 
@@ -98,7 +111,7 @@ if( isOnBlack(sensor1)){
 
 bool isOnBlack(int sensor){
 
-if( sensor <= onblack)
+if( sensor == onblack)
 return true;
 else
 return false;
@@ -106,7 +119,7 @@ return false;
 
 
 bool isOnWhite(int sensor){
-  if(sensor >= onWhite)
+  if(sensor == onWhite)
   return true;
   else
   return false;
