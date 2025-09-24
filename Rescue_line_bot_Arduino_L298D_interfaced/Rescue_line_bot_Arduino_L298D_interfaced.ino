@@ -78,25 +78,30 @@ else if( isOnBlack(extreme_right) || isOnBlack(lower_right))
 
 else
 {
-  if(isOnWhite(extreme_left) && isOnWhite(extreme_right) )
+  if(isOnWhite(extreme_left) && isOnWhite(lower_left) && isOnBlack(middle) && isOnWhite(lower_right) && isOnWhite(extreme_right))
   {
     Forward();
   }
-  else if(isOnWhite(lower_left) && isOnBlack(lower_right) && isOnBlack(extreme_right)  )
-    {
+  else if(isOnWhite(extreme_left) && isOnWhite(lower_left) && isOnWhite(middle) && isOnBlack(lower_right) || isOnBlack(extreme_right))
+  {
     Right();
   }
-  else if(isOnBlack(lower_left) &&  isOnWhite(lower_right) &&  isOnWhite(extreme_right) )
+  else if(isOnBlack(extreme_left) && isOnBlack(lower_left) && isOnWhite(middle) && isOnWhite(lower_right) || isOnWhite(extreme_right) )
   {
     Left();
   }
-  else if( isOnWhite(extreme_left) && isOnWhite(lower_left) && isOnWhite(middle) && isOnWhite(lower_right) && isOnWhite(extreme_right) ){
+  else if( isOnWhite(extreme_left) && isOnWhite(lower_left) && isOnWhite(middle) && isOnWhite(lower_right) && isOnWhite(extreme_right) )
+  {
     Left();   // replace with left if gap is present
     Left();   // replace with left if gap is present
     Left();   // replace with left if gap is present
     Left();   // replace with left if gap is present
+    Left();   // replace with left if gap is present
+    Left();   // replace with left if gap is present
+    
   }
-  else if( isOnBlack(extreme_left) && isOnBlack(lower_left) && isOnBlack(middle) && isOnBlack(lower_right) && isOnBlack(extreme_right) ){
+  else if( isOnBlack(extreme_left) && isOnBlack(lower_left) && isOnBlack(middle) && isOnBlack(lower_right) && isOnBlack(extreme_right) )
+  {
     Stop();
   }
 
